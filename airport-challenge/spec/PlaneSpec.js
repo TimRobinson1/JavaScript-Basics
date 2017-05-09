@@ -23,4 +23,15 @@ describe("Plane", function() {
     plane.takeoff();
     expect(plane.isFlying).toEqual(true);
   });
+
+  it("has the flying status changed by airport", function() {
+    airport.land(plane);
+    expect(plane.isFlying).toEqual(false);
+  });
+
+  it("is flying after being called by airport to takeoff", function() {
+    airport.land(plane);
+    airport.takeoff(plane);
+    expect(plane.isFlying).toEqual(true);
+  });
 });

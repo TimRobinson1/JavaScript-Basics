@@ -1,7 +1,7 @@
 describe("Airport", function() {
   beforeEach(function() {
     airport = new Airport();
-    plane = 'placeholder_plane'
+    plane = new Plane();
   });
 
   it("exists as an object", function() {
@@ -24,9 +24,10 @@ describe("Airport", function() {
   });
 
   it("Can takeoff specific planes", function() {
+    var specialPlane = new Plane();
     airport.land(plane);
-    airport.land('plane');
+    airport.land(specialPlane);
     airport.takeoff(plane);
-    expect(airport.hangar).toEqual(['plane']);
+    expect(airport.hangar).toEqual([specialPlane]);
   });
 });
