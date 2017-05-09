@@ -16,4 +16,17 @@ describe("Airport", function() {
     airport.land(plane);
     expect(airport.hangar).toEqual([plane]);
   });
+
+  it("Removes planes from hangar when taking them off", function() {
+    airport.land(plane);
+    airport.takeoff(plane);
+    expect(airport.hangar).toEqual([]);
+  });
+
+  it("Can takeoff specific planes", function() {
+    airport.land(plane);
+    airport.land('plane');
+    airport.takeoff(plane);
+    expect(airport.hangar).toEqual(['plane']);
+  });
 });
