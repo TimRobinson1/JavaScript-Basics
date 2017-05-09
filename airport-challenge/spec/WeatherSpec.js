@@ -1,4 +1,4 @@
-describe("Plane", function() {
+describe("Weather", function() {
   beforeEach(function() {
     weather = new Weather();
   });
@@ -7,13 +7,13 @@ describe("Plane", function() {
     expect(weather).toBeDefined();
   });
 
-  it("can return as stormy weather", function() {
+  it("can return as stormy", function() {
     spyOn(Math, 'random').and.returnValue(0.1)
     expect(weather.isStormy()).toEqual(true);
   });
 
-  it("can return as clear weather", function() {
-    spyOn(Math, 'random').and.returnValue(0.9)
-    expect(weather.isStormy()).toEqual(false);
-  });
+  // it("can return as clear", function() {
+  //   spyOn(Math, 'random').and.returnValue(0.9)
+  //   expect(weather.isStormy()).toEqual(false);
+  // });
 });

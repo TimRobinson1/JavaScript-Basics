@@ -2,6 +2,7 @@ describe("Plane", function() {
   beforeEach(function() {
     plane = new Plane();
     airport = new Airport();
+    spyOn(Math, 'random').and.returnValue(0.9)
   });
 
 

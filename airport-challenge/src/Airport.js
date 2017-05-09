@@ -3,6 +3,10 @@ function Airport() {
 };
 
 Airport.prototype.land = function(plane) {
+  var weather = new Weather();
+  if (weather.isStormy()) {
+    throw "Weather is stormy";
+  }
   plane.land();
   this.hangar.push(plane);
 };
