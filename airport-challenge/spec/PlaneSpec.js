@@ -2,7 +2,7 @@ describe("Plane", function() {
   beforeEach(function() {
     plane = new Plane();
     airport = new Airport();
-    spyOn(Math, 'random').and.returnValue(0.9)
+    spyOn(Math, 'random').and.returnValue(0.9);
   });
 
   it("exists as an object", function() {
@@ -15,7 +15,7 @@ describe("Plane", function() {
 
   it("can be given a landed status", function() {
     plane.land();
-    expect(plane.isFlying).toEqual(false)
+    expect(plane.isFlying).toEqual(false);
   });
 
   it("can be set to flying after landing", function() {
