@@ -6,7 +6,7 @@ describe("Airport", function() {
 
   describe("Stormy weather", function() {
     beforeEach(function() {
-      spyOn(Math, 'random').and.returnValue(0.1)
+      spyOn(Math, 'random').and.returnValue(0.1);
     });
 
     it("Fails to land plane if weather is stormy", function() {
@@ -24,7 +24,7 @@ describe("Airport", function() {
 
   describe("Clear weather", function() {
     beforeEach(function() {
-      spyOn(Math, 'random').and.returnValue(0.9)
+      spyOn(Math, 'random').and.returnValue(0.9);
     });
 
     it("exists as an object", function() {
@@ -66,6 +66,29 @@ describe("Airport", function() {
       expect(function() {
         airport.takeoff(plane);
       }).toThrow("Plane is already flying.");
+    });
+
+    it("Starts with a default capacity", function() {
+      expect(airport.capacity).toEqual(10);
+    });
+
+    it("Can be adjusted to a different capacity", function() {
+      airport.setCapacity(20);
+      expect(airport.capacity).toEqual(20);
+    });
+
+    it("Throws error if capacity is set to 0 or lower", function() {
+      expect(function() {
+        airport.setCapacity(0);
+      }).toThrow("Invalid capacity for the airport");
+    });
+
+    it("Throws error if capacity is set lower than plane count", function() {
+      airport.land(plane);
+      airport.land(new Plane);
+      expect(function() {
+        airport.setCapacity(1);
+      }).toThrow("Too many planes in hangar to set capacity that low");
     });
   });
 });
