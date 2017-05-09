@@ -40,4 +40,26 @@ describe("Airport", function() {
       airport.land(plane);
     }).toThrow("Weather is stormy");
   });
+
+  it("Fails to takeoff plane if weather is stormy", function() {
+    spyOn(Math, 'random').and.returnValue(0.1)
+    expect(function() {
+      airport.takeoff(plane);
+    }).toThrow("Weather is stormy");
+  });
+
+  it("Fails to land plane if already landed", function() {
+    spyOn(Math, 'random').and.returnValue(0.9)
+    airport.land(plane);
+    expect(function() {
+      airport.land(plane);
+    }).toThrow("Plane is already landed.");
+  });
+
+  it("Fails to takeoff plane if not landed", function() {
+    spyOn(Math, 'random').and.returnValue(0.9)
+    expect(function() {
+      airport.takeoff(plane);
+    }).toThrow("Plane is already flying.");
+  });
 });

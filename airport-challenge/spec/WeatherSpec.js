@@ -12,8 +12,8 @@ describe("Weather", function() {
     expect(weather.isStormy()).toEqual(true);
   });
 
-  // it("can return as clear", function() {
-  //   spyOn(Math, 'random').and.returnValue(0.9)
-  //   expect(weather.isStormy()).toEqual(false);
-  // });
+  it("can return as clear", function() {
+    spyOn(Math, 'random').and.returnValue(0.9)
+    expect(weather.isStormy()).toEqual(false);
+  });
 });

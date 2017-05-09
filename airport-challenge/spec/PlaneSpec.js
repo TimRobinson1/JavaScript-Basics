@@ -5,7 +5,6 @@ describe("Plane", function() {
     spyOn(Math, 'random').and.returnValue(0.9)
   });
 
-
   it("exists as an object", function() {
     expect(plane).toBeDefined();
   });
