@@ -4,62 +4,68 @@ describe("Airport", function() {
     plane = new Plane();
   });
 
-  it("exists as an object", function() {
-    expect(airport).toBeDefined();
+  describe("Stormy weather", function() {
+    beforeEach(function() {
+      spyOn(Math, 'random').and.returnValue(0.1)
+    });
+
+    it("Fails to land plane if weather is stormy", function() {
+      expect(function() {
+        airport.land(plane);
+      }).toThrow("Weather is stormy");
+    });
+
+    it("Fails to takeoff plane if weather is stormy", function() {
+      expect(function() {
+        airport.takeoff(plane);
+      }).toThrow("Weather is stormy");
+    });
   });
 
-  it("starts with no planes docked", function() {
-    expect(airport.hangar).toEqual([]);
-  });
+  describe("Clear weather", function() {
+    beforeEach(function() {
+      spyOn(Math, 'random').and.returnValue(0.9)
+    });
 
-  it("adds planes to hangar when landing them", function() {
-    spyOn(Math, 'random').and.returnValue(0.9)
-    airport.land(plane);
-    expect(airport.hangar).toEqual([plane]);
-  });
+    it("exists as an object", function() {
+      expect(airport).toBeDefined();
+    });
 
-  it("Removes planes from hangar when taking them off", function() {
-    spyOn(Math, 'random').and.returnValue(0.9)
-    airport.land(plane);
-    airport.takeoff(plane);
-    expect(airport.hangar).toEqual([]);
-  });
+    it("starts with no planes docked", function() {
+      expect(airport.hangar).toEqual([]);
+    });
 
-  it("Can takeoff specific planes", function() {
-    spyOn(Math, 'random').and.returnValue(0.9)
-    var specialPlane = new Plane();
-    airport.land(plane);
-    airport.land(specialPlane);
-    airport.takeoff(plane);
-    expect(airport.hangar).toEqual([specialPlane]);
-  });
-
-  it("Fails to land plane if weather is stormy", function() {
-    spyOn(Math, 'random').and.returnValue(0.1)
-    expect(function() {
+    it("adds planes to hangar when landing them", function() {
       airport.land(plane);
-    }).toThrow("Weather is stormy");
-  });
+      expect(airport.hangar).toEqual([plane]);
+    });
 
-  it("Fails to takeoff plane if weather is stormy", function() {
-    spyOn(Math, 'random').and.returnValue(0.1)
-    expect(function() {
-      airport.takeoff(plane);
-    }).toThrow("Weather is stormy");
-  });
-
-  it("Fails to land plane if already landed", function() {
-    spyOn(Math, 'random').and.returnValue(0.9)
-    airport.land(plane);
-    expect(function() {
+    it("Removes planes from hangar when taking them off", function() {
       airport.land(plane);
-    }).toThrow("Plane is already landed.");
-  });
-
-  it("Fails to takeoff plane if not landed", function() {
-    spyOn(Math, 'random').and.returnValue(0.9)
-    expect(function() {
       airport.takeoff(plane);
-    }).toThrow("Plane is already flying.");
+      expect(airport.hangar).toEqual([]);
+    });
+
+    it("Can takeoff specific planes", function() {
+      var specialPlane = new Plane();
+      airport.land(plane);
+      airport.land(specialPlane);
+      airport.takeoff(plane);
+      expect(airport.hangar).toEqual([specialPlane]);
+    });
+
+
+    it("Fails to land plane if already landed", function() {
+      airport.land(plane);
+      expect(function() {
+        airport.land(plane);
+      }).toThrow("Plane is already landed.");
+    });
+
+    it("Fails to takeoff plane if not landed", function() {
+      expect(function() {
+        airport.takeoff(plane);
+      }).toThrow("Plane is already flying.");
+    });
   });
 });
