@@ -1,6 +1,6 @@
-function Airport() {
+function Airport(weather) {
   this.hangar = [];
-  this.weather = new Weather();
+  this.weather = weather;
   this.capacity = 10;
 };
 

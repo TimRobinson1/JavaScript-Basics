@@ -1,6 +1,6 @@
 describe("Airport", function() {
   beforeEach(function() {
-    airport = new Airport();
+    airport = new Airport(new Weather);
     plane = new Plane();
   });
 
